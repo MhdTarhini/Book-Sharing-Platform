@@ -4,18 +4,19 @@ import Register from "./pages/register/register";
 import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import "./utilities.css";
+import { AuthContextProvider } from "./context/authContext";
 
 function App() {
   return (
-    // <AuthContextProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
-    // </AuthContextProvider>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthContextProvider>
   );
 }
 

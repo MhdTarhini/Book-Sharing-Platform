@@ -20,20 +20,19 @@ function Register() {
     setdata({ ...data, [e.target.name]: e.target.value });
   };
   const handlesubmit = async () => {
+    console.log(data);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/guest/register",
-        data
+        "http://127.0.0.1:8000/auth/register",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       console.log(response.data);
-
-      if (response.data.status == "success") {
-        console.log("/here");
-
-        navigate("/");
-      } else {
-        console.log("error");
-      }
+      navigate("/");
     } catch (err) {
       setError(true);
       setErrorContent(err.response.data.message);
@@ -53,21 +52,21 @@ function Register() {
         <div className="inputs flex column">
           <Input
             onchange={handleDataChange}
-            label={"Mobile Number or Email"}
+            label={"First Name"}
+            name={"firstName"}
+            type={"text"}
+          />
+          <Input
+            onchange={handleDataChange}
+            label={"Last Name"}
+            name={"lastName"}
+            type={"text"}
+          />
+          <Input
+            onchange={handleDataChange}
+            label={"Email"}
             name={"email"}
             type={"email"}
-          />
-          <Input
-            onchange={handleDataChange}
-            label={"Full Name"}
-            name={"name"}
-            type={"text"}
-          />
-          <Input
-            onchange={handleDataChange}
-            label={"Username"}
-            name={"username"}
-            type={"text"}
           />
           <Input
             onchange={handleDataChange}

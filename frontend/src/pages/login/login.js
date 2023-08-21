@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 
 function Login() {
-  //   const { login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [errorContent, setErrorContent] = useState("");
@@ -20,21 +20,21 @@ function Login() {
   };
 
   const handlesubmit = async () => {
-    // try {
-    //   await login(data);
-    //   navigate("/home");
-    // } catch (err) {
-    //   setError(true);
-    //   setErrorContent(err.response.data.message);
-    // }
+    try {
+      await login(data);
+      navigate("/home");
+    } catch (err) {
+      setError(true);
+      setErrorContent(err.response.data.message);
+    }
   };
   return (
     <div className="flex column center signin-container">
-      <div className="logo">Books Platform</div>
+      <div className="logo">Books </div>
       <div className="inputs flex column">
         <Input
           onchange={handleDataChange}
-          label={"Mobile Number or Email"}
+          label={"Email"}
           name={"email"}
           type={"email"}
         />

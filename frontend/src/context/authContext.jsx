@@ -10,18 +10,27 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (data) => {
     const response = await axios.post(
-      "http://127.0.0.1:8000/api/guest/login",
-      data
+      "http://127.0.0.1:8000/auth/login",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
     const userdata = await response.data;
-    setUserData(userdata.data);
+    setUserData(userdata);
     localStorage.setItem("user", JSON.stringify(userData));
   };
   const logout = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
-    await axios.post("http://127.0.0.1:8000/api/logout");
+    await axios.post("http://127.0.0.1:8000/auth/logout");
     localStorage.clear();
     setUserData(null);
+  };
+  const verify = async () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
+    const response = await axios.post("http://127.0.0.1:8000/auth/verify");
   };
 
   useEffect(() => {
