@@ -1,0 +1,64 @@
+/* InputPost.css */
+
+.input-post {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+h2 {
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+textarea {
+    margin: 8px 0;
+    padding: 8px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+input[type="file"] {
+    margin-top: 8px;
+}
+
+.selected-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.file-label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+}
