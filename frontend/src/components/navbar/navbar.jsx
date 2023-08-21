@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./navbar.css";
+import { AuthContext } from "../../context/authContext";
 
 function Navbar() {
+  const { logout } = useContext(AuthContext);
   return (
     <div className="navbar">
       <div className="logo">Logo</div>
@@ -28,7 +30,9 @@ function Navbar() {
           className="search-input"
         />
       </div>
-      <div className="user-info">User</div>
+      <div className="user-info" onClick={logout}>
+        User
+      </div>
     </div>
   );
 }

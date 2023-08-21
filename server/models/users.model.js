@@ -14,7 +14,7 @@ const likeSchema = new mongoose.Schema(
 
 const bookPostsShcema = new mongoose.Schema(
   {
-    name: String,
+    title: String,
     author: String,
     review: String,
     genre: String,

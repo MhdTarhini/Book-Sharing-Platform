@@ -4,24 +4,19 @@ const mongooseConnect = require("./configs/mongoDB.connect");
 const cors = require("cors");
 
 require("dotenv").config();
-const allowedOrigins = ["http://localhost:3000"];
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  })
-);
+
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 
 const authMiddleware = require("./middlewares/auth.middleware");
 
 const authRouter = require("./routes/auth.routes");
 app.use("/auth", authRouter);
+
+const shareRouter = require("./routes/Share.routes");
+app.use("/share", authMiddleware, shareRouter);
+const uploadImage = require("./routes/uploadImage.routes");
+app.use("/uploadImage", uploadImage);
 
 
 app.listen(8000, (err) => {

@@ -51,5 +51,8 @@ const register = async (req, res) => {
 const verify = (_, res) => {
   res.send("Verfied");
 };
+const logout = (_, res) => {
+  res.send("logout");
+};
 
-module.exports = { login, register, verify };
+module.exports = { login, register, verify, logout };
