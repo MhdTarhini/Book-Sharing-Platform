@@ -3,6 +3,6 @@ const router = express.Router();
 const { share, getPost } = require("../controllers/share.controllers");
 
 router.post("/share_book", share);
-router.get("/get_posts", getPost);
+router.get("/get_posts/:id?", getPost);
 
 module.exports = router;

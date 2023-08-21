@@ -15,9 +15,13 @@ app.use("/auth", authRouter);
 
 const shareRouter = require("./routes/Share.routes");
 app.use("/share", authMiddleware, shareRouter);
+
 const uploadImage = require("./routes/uploadImage.routes");
 app.use("/uploadImage", uploadImage);
 
+const followRouter = require("./routes/follow.routes");
+const Follow = require("./models/follow.model");
+const Like = require("./models/like.model");
 
 app.listen(8000, (err) => {
   if (err) {
