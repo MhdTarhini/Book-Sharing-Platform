@@ -46,6 +46,7 @@ function ShareBook() {
           userId: userData.user._id,
           title: "",
           author: "",
+          genre: "",
           review: "",
           pic_url: null,
         });
@@ -77,12 +78,13 @@ function ShareBook() {
   return (
     <div className="input-post">
       <h2>Share Your Favorite Book</h2>
-      <div className="input">
+      <div className="input-fields">
         <input
           type="text"
           placeholder="Book Title"
           name="title"
           value={data.title}
+          className="input-one"
           onChange={handleChange}
         />
         <input
@@ -90,6 +92,15 @@ function ShareBook() {
           placeholder="Author"
           name="author"
           value={data.author}
+          className="input-one"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="Gener"
+          name="genre"
+          value={data.genre}
+          className="input-one"
           onChange={handleChange}
         />
         <textarea
@@ -102,6 +113,7 @@ function ShareBook() {
           type="file"
           id="image"
           name="file"
+          className="input-one"
           accept="image/*"
           onChange={handleImageChange}
         />
