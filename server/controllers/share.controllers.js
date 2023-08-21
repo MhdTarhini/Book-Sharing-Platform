@@ -1,4 +1,5 @@
 const User = require("../models/users.model");
+const Follow = require("../models/follow.model");
 
 const share = async (req, res) => {
   console.log(req.body);
@@ -30,7 +31,7 @@ const share = async (req, res) => {
     res.status(201).json({ message: "Book post added successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "failed" });
   }
 };
 
@@ -44,12 +45,38 @@ const getPost = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const serializedUser = user.toObject();
-    res.json({ user: serializedUser.posts });
+    const userPosts = user.posts.map((post) => ({
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+      post: post,
+    }));
+
+    const followedUsers = await Follow.find({ follower: id });
+
+    const followedUsersData = [];
+    for (const follow of followedUsers) {
+      const followedUser = await User.findById(follow.following);
+      followedUsersData.push(
+        ...followedUser.posts.map((post) => ({
+          user: {
+            firstName: followedUser.firstName,
+            lastName: followedUser.lastName,
+          },
+          post: post,
+        }))
+      );
+    }
+
+    const allPosts = userPosts.concat(...followedUsersData);
+    allPosts.sort((a, b) => b.post.createdAt - a.post.createdAt);
+    res.json({ data: allPosts });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Failed to fetch posts" });
   }
 };
 
 module.exports = { share, getPost };
+
