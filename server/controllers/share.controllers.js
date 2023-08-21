@@ -10,6 +10,9 @@ const share = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+    if (pic_url === null) {
+      return res.json({ message: "image is required" });
+    }
 
     const newBookPost = {
       title,
@@ -31,4 +34,5 @@ const share = async (req, res) => {
   }
 };
 
-module.exports = { share };
+const getPost = (req, res) => {};
+module.exports = { share, getPost };

@@ -7,14 +7,14 @@ function ShareBook() {
   const { userData } = useContext(AuthContext);
   axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
 
+  const [postImage, setPostImage] = useState(null);
   const [data, setdata] = useState({
     userId: userData.user._id,
     title: "",
     author: "",
     review: "",
-    pic_url: null,
+    pic_url: postImage,
   });
-  const [postImage, setPostImage] = useState(null);
 
   const handleChange = (e) => {
     setdata({ ...data, [e.target.name]: e.target.value });
@@ -41,6 +41,15 @@ function ShareBook() {
         }
       );
       console.log(response.data);
+      if (response.data.message === "Book post added successfully") {
+        setdata({
+          userId: userData.user._id,
+          title: "",
+          author: "",
+          review: "",
+          pic_url: null,
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -58,7 +67,7 @@ function ShareBook() {
         }
       );
       const filename = response.data.filename;
-      console.log(filename);
+      setPostImage(filename);
       setdata({ ...data, pic_url: filename });
     } catch (error) {
       console.log(error);
@@ -73,17 +82,20 @@ function ShareBook() {
           type="text"
           placeholder="Book Title"
           name="title"
+          value={data.title}
           onChange={handleChange}
         />
         <input
           type="text"
           placeholder="Author"
           name="author"
+          value={data.author}
           onChange={handleChange}
         />
         <textarea
           placeholder="Your Review"
           name="review"
+          value={data.review}
           onChange={handleChange}
         />
         <input
@@ -92,9 +104,11 @@ function ShareBook() {
           name="file"
           accept="image/*"
           onChange={handleImageChange}
-          required
         />
-        <button type="submit" onClick={handleSubmit}>
+        <label htmlFor="image" className="image-upload-label">
+          Upload Image
+        </label>
+        <button type="button" onClick={handleSubmit}>
           Post
         </button>
       </div>

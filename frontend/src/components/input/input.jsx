@@ -16,7 +16,7 @@ function Input({ onchange, label, name, type }) {
     <div className="flex column input ">
       <label
         htmlFor={name}
-        className={showLabel ? "label-class" : "none-opacity"}>
+        className={showLabel ? " label label-class" : " label none-opacity"}>
         {label}
       </label>
       <input
