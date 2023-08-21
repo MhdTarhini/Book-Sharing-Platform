@@ -1,0 +1,35 @@
+.input {
+    position: relative;
+    /* Add this */
+    padding: 0 5px 0 5px;
+}
+
+input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    /* Add padding for input */
+    font-size: 16px;
+    /* Adjust font size if needed */
+}
+
+label {
+    position: absolute;
+    /* Position labels absolutely */
+    top: -10px;
+    left: 5px;
+    font-size: 12px;
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.label-class {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.none-opacity {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}

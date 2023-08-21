@@ -1,0 +1,44 @@
+.signup-container {
+    max-width: 400px;
+    position: relative;
+    padding: 40px;
+    height: 700px;
+    left: 38%;
+    border: 1px solid rgba(0, 0, 0, 0.286);
+    gap: 20px;
+}
+
+.logo {
+    width: 175px;
+    height: 51px;
+    cursor: pointer;
+}
+
+.header-text {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0 40px 10px;
+    text-align: center;
+    color: rgba(65, 65, 65, 0.678);
+    width: 100%;
+}
+
+.facebook {
+    border: none;
+    text-align: center;
+    background-color: rgba(0, 149, 246);
+    width: 100%;
+    padding: 10px;
+    color: white;
+}
+
+.inputs {
+    width: 100%;
+    gap: 5px
+}
+
+.text {
+    font-size: 12px;
+    color: rgba(65, 65, 65, 0.678);
+}
