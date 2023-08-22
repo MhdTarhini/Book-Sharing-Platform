@@ -3,20 +3,49 @@ import "./card.css";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
 
-function Card({ id, title, author, imageSrc, review, user, like }) {
+function Card({ id, title, author, imageSrc, review, user, like, gener }) {
   const { userData } = useContext(AuthContext);
   const [userliked, setUserliked] = useState(false);
+  const [userfollow, setUserfollow] = useState(false);
 
   const isLiked = () => {
-    like.map((postLike) => {
-      if (postLike.user_id === userData.user._id) {
-        setUserliked(true);
-      } else {
-        setUserliked(false);
-      }
-    });
+    if (like.length > 0) {
+      like.map((postLike) => {
+        if (postLike.user_id === userData.user._id) {
+          setUserliked(true);
+        } else {
+          setUserliked(false);
+        }
+      });
+    } else {
+      setUserliked(false);
+    }
   };
 
+  const handleFollow = async () => {
+    const data = new FormData();
+    data.append("followerId", userData.user._id);
+    data.append("followingId", user.userId);
+    try {
+      if (!userfollow) {
+        await axios.post(`http://127.0.0.1:8000//user/follow`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setUserfollow(true);
+      } else {
+        await axios.post(`http://127.0.0.1:8000/user/unfollow/`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setUserfollow(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleLike = async () => {
     const data = new FormData();
     data.append("user_id", userData.user._id);
@@ -50,20 +79,55 @@ function Card({ id, title, author, imageSrc, review, user, like }) {
   }
   useEffect(() => {
     isLiked();
-    console.log("hello");
   }, [like]);
   return (
     <div className="card">
       <img src={imageUrl} alt={title} className="card-image" />
       <div className="card-content">
         <h3 className="card-title">{title}</h3>
-        <h5 className="card-author">{author}</h5>
+        <h5 className="card-author">
+          {author} , {gener}
+        </h5>
         <p className="card-review">{review}</p>
 
         {user && (
-          <p className="card-user">
-            Posted by: {user.firstName} {user.lastName}
-          </p>
+          <div className="card-user">
+            <div>
+              Posted by: {user.firstName} {user.lastName}
+            </div>
+            <div
+              className="follow"
+              onClick={() => {
+                handleFollow();
+              }}>
+              {userfollow ? (
+                <svg
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 24 24"
+                  fill="#F0F8FF"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <rect width="24" height="24" fill="white" />
+                  <path
+                    d="M5 13.3636L8.03559 16.3204C8.42388 16.6986 9.04279 16.6986 9.43108 16.3204L19 7"
+                    stroke="#000000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  fill="#000000"
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 32 32"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.002 27.959c0-0.795 0.597-1.044 0.835-1.154l8.783-4.145c0.63-0.289 1.064-0.885 1.149-1.573s-0.193-1.37-0.733-1.803c-2.078-1.668-3.046-5.334-3.046-7.287v-4.997c0-2.090 3.638-4.995 7.004-4.995 3.396 0 6.997 2.861 6.997 4.995v4.998c0 1.924-0.8 5.604-2.945 7.292-0.547 0.43-0.831 1.115-0.749 1.807 0.082 0.692 0.518 1.291 1.151 1.582l2.997 1.422 0.494-1.996-2.657-1.243c2.771-2.18 3.708-6.463 3.708-8.864v-4.997c0-3.31-4.582-6.995-8.998-6.995s-9.004 3.686-9.004 6.995v4.997c0 2.184 0.997 6.602 3.793 8.846l-8.783 4.145s-1.998 0.89-1.998 1.999v3.001c0 1.105 0.895 1.999 1.998 1.999h21.997v-2l-21.996 0.001v-2.029zM30.998 25.996h-3v-3c0-0.552-0.448-1-1-1s-1 0.448-1 1v3h-3c-0.552 0-1 0.448-1 1s0.448 1 1 1h3v3c0 0.552 0.448 1 1 1s1-0.448 1-1v-3h3c0.552 0 1-0.448 1-1s-0.448-1-1-1z"></path>
+                </svg>
+              )}
+            </div>
+          </div>
         )}
       </div>
       <div className="like-button">

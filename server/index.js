@@ -30,6 +30,9 @@ app.use("/user", followRouter);
 const userLikes = require("./routes/like.routes");
 app.use("/like", userLikes);
 
+const searchRouter = require("./routes/search.routes");
+app.use("/search", searchRouter);
+
 const Follow = require("./models/follow.model");
 
 app.listen(8000, (err) => {

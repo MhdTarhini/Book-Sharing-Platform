@@ -26,8 +26,6 @@ function Cards() {
       console.error(error);
     }
   };
-  console.log(posts);
-
   useEffect(() => {
     getPosts();
   }, []);
@@ -40,6 +38,7 @@ function Cards() {
         return (
           <Card
             like={post.post.likes}
+            gener={post.post.genre}
             key={post.post._id}
             id={post.post._id}
             title={post.post.title}

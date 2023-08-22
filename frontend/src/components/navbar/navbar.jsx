@@ -1,9 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./navbar.css";
 import { AuthContext } from "../../context/authContext";
 
-function Navbar() {
+function Navbar({ onSearch }) {
+  const [searchText, setSearchText] = useState("");
   const { logout } = useContext(AuthContext);
+  const handleSearch = () => {
+    onSearch(searchText);
+  };
+  handleSearch();
+
   return (
     <div className="navbar">
       <div className="logo">Logo</div>
@@ -28,6 +34,7 @@ function Navbar() {
           id="search"
           placeholder="Search"
           className="search-input"
+          onChange={(e) => setSearchText(e.target.value)}
         />
       </div>
       <div className="user-info" onClick={logout}>

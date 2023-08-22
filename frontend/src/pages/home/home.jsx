@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/navbar/navbar";
-import Card from "../../components/card/card";
 import ShareBook from "../../components/shareBook/shareBook";
 import Cards from "../../components/cards/cards";
+import SearchCard from "../../components/searchCards/SearchCard";
 
 function Home() {
+  const [search, setSearch] = useState("");
+  const handleSearch = (text) => {
+    setSearch(text);
+  };
+
   return (
     <>
-      <Navbar />
+      <Navbar onSearch={handleSearch} />
       <ShareBook />
-      <Cards />
+      {search === "" ? <Cards /> : <SearchCard search={search} />}
     </>
   );
 }
