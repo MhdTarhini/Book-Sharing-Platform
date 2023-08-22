@@ -7,7 +7,7 @@ import "./cards.css";
 function Cards() {
   const { userData } = useContext(AuthContext);
   axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
-
+  
   const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
@@ -20,23 +20,26 @@ function Cards() {
           },
         }
       );
-      setPosts(response.data.data);
+      let postsdata = await response.data.data;
+      setPosts(postsdata);
     } catch (error) {
       console.error(error);
     }
   };
+  console.log(posts);
 
   useEffect(() => {
     getPosts();
   }, []);
 
   Cards.getPosts = getPosts;
-  
+
   return (
     <div className="cards">
       {posts.map((post) => {
         return (
           <Card
+            like={post.post.likes}
             key={post.post._id}
             title={post.post.title}
             author={post.post.author}
