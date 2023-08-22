@@ -150,7 +150,6 @@ function Card({ id, title, author, imageSrc, review, user, like, gener }) {
           </div>
         )}
       </div>
-
       <div className="like-button">
         <svg
           width="25px"

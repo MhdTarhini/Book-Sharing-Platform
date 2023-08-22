@@ -7,6 +7,10 @@
     transition: transform 0.2s, box-shadow 0.2s;
     background-color: #ffffff;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
 }
 
 .card:hover {
@@ -22,18 +26,25 @@
 
 .card-content {
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 .card-title {
     font-size: 18px;
     margin: 0;
     color: #333333;
+    align-self: center;
+    padding-bottom: 5px;
 }
 
 .card-author {
     font-size: 14px;
     margin: 4px 0;
     color: #777777;
+
 }
 
 .card-review {
@@ -57,7 +68,8 @@
     font-size: 0.9rem;
     color: #3688ff;
     gap: 5px;
-    padding: 5px;
+    display: flex;
+    align-self: flex-start;
 }
 
 .like-icon {
@@ -66,4 +78,10 @@
 
 .like-button:hover {
     color: #2074d2;
+}
+.card-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 0px;
 }

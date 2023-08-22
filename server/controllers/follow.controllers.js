@@ -33,7 +33,6 @@ const followUser = async (req, res) => {
 
 const unfollowUser = async (req, res) => {
   const { followerId, followingId } = req.body;
-  console.log(req.body);
 
   try {
     const existingFollow = await Follow.findOneAndDelete({

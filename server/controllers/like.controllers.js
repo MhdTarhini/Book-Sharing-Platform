@@ -1,7 +1,6 @@
 const User = require("../models/users.model");
 
 const userLike = async (req, res) => {
-  console.log(req.body);
   const { user_id, postId } = req.body;
 
   try {
@@ -30,7 +29,6 @@ const userLike = async (req, res) => {
   }
 };
 const userUnlike = async (req, res) => {
-  console.log(req.body);
   const { user_id, postId } = req.body;
 
   try {

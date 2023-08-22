@@ -2,7 +2,6 @@ const User = require("../models/users.model");
 const Follow = require("../models/follow.model");
 
 const share = async (req, res) => {
-  console.log(req.body);
   try {
     const { userId, title, author, review, genre, pic_url } = req.body;
 
