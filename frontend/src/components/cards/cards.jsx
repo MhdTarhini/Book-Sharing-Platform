@@ -25,10 +25,13 @@ function Cards() {
       console.error(error);
     }
   };
-  console.log(posts);
+
   useEffect(() => {
     getPosts();
   }, []);
+
+  Cards.getPosts = getPosts;
+  
   return (
     <div className="cards">
       {posts.map((post) => {

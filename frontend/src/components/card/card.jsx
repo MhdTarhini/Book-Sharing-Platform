@@ -2,7 +2,12 @@ import React from "react";
 import "./card.css";
 
 function Card({ title, author, imageSrc, review, user }) {
-  const imageUrl = `https://img.freepik.com/premium-photo/book-library-with-old-open-textbook-stack-piles-literature-text-archive-reading-desk_779468-5822.jpg`;
+  let imageUrl = "";
+  if (imageSrc == undefined || imageSrc == null) {
+    imageUrl = `https://img.freepik.com/premium-photo/book-library-with-old-open-textbook-stack-piles-literature-text-archive-reading-desk_779468-5822.jpg`;
+  } else {
+    imageUrl = `../uploads/images/${imageSrc}`;
+  }
   return (
     <div className="card">
       <img src={imageUrl} alt={title} className="card-image" />

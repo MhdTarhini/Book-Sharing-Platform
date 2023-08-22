@@ -28,7 +28,6 @@ const followRouter = require("./routes/follow.routes");
 app.use("/user", followRouter);
 
 const Follow = require("./models/follow.model");
-const Like = require("./models/like.model");
 
 app.listen(8000, (err) => {
   if (err) {

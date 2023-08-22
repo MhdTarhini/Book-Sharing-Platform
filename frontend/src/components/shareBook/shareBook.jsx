@@ -2,30 +2,28 @@ import React, { useContext, useState } from "react";
 import "./shareBook.css";
 import axios from "axios";
 import { AuthContext } from "../../context/authContext";
+import Cards from "../../components/cards/cards";
 
 function ShareBook() {
   const { userData } = useContext(AuthContext);
   axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
-
+  const [error, setError] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const [postImage, setPostImage] = useState(null);
-  const [data, setdata] = useState({
+  const [data, setData] = useState({
     userId: userData.user._id,
     title: "",
     author: "",
     review: "",
-    pic_url: postImage,
+    pic_url: null,
   });
 
   const handleChange = (e) => {
-    setdata({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleImageChange = (e) => {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      setPostImage(event.target.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
+    setPostImage(e.target.files[0]);
   };
 
   const handleSubmit = async () => {
@@ -42,14 +40,17 @@ function ShareBook() {
       );
       console.log(response.data);
       if (response.data.message === "Book post added successfully") {
-        setdata({
+        setData({
           userId: userData.user._id,
           title: "",
           author: "",
-          genre: "",
           review: "",
           pic_url: null,
         });
+        Cards.getPosts();
+      } else {
+        setErrorText(response.data.message);
+        setError(true);
       }
     } catch (error) {
       console.error(error);
@@ -57,21 +58,20 @@ function ShareBook() {
   };
 
   const uploadImage = async () => {
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/uploadImage",
-        { image: postImage },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const filename = response.data.filename;
-      setPostImage(filename);
-      setdata({ ...data, pic_url: filename });
-    } catch (error) {
-      console.log(error);
+    if (postImage) {
+      console.log(postImage);
+      const formData = new FormData();
+      formData.append("file", postImage);
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/uploadImage",
+          formData
+        );
+        const filename = response.data.filename;
+        setData({ ...data, pic_url: filename });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -123,6 +123,7 @@ function ShareBook() {
         <button type="button" onClick={handleSubmit}>
           Post
         </button>
+        {/* <div className="error">{error ? <div>{errorText}</div> : null}</div> */}
       </div>
     </div>
   );
