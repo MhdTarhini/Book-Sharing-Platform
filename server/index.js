@@ -27,6 +27,9 @@ app.use("/uploadImage", uploadImage);
 const followRouter = require("./routes/follow.routes");
 app.use("/user", followRouter);
 
+const userLikes = require("./routes/like.routes");
+app.use("/like", userLikes);
+
 const Follow = require("./models/follow.model");
 
 app.listen(8000, (err) => {

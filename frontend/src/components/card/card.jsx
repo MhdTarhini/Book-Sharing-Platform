@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./card.css";
 import { AuthContext } from "../../context/authContext";
+import axios from "axios";
 
-function Card({ title, author, imageSrc, review, user, like }) {
+function Card({ id, title, author, imageSrc, review, user, like }) {
   const { userData } = useContext(AuthContext);
   const [userliked, setUserliked] = useState(false);
 
@@ -14,6 +15,27 @@ function Card({ title, author, imageSrc, review, user, like }) {
         setUserliked(false);
       }
     });
+  };
+
+  const handleLike = async () => {
+    const data = new FormData();
+    data.append("user_id", userData.user._id);
+    data.append("postId", id);
+    try {
+      if (!userliked) {
+        await axios.post(`http://127.0.0.1:8000/like/`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        setUserliked(true);
+      } else {
+        await axios.delete(`http://127.0.0.1:8000/like/unlike/`, data);
+        setUserliked(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   let imageUrl = "";
@@ -48,10 +70,9 @@ function Card({ title, author, imageSrc, review, user, like }) {
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           className="pointer icon"
-          // onClick={() => {
-          //   handleLike();
-          // }}
-        >
+          onClick={() => {
+            handleLike();
+          }}>
           <path
             d="M895.36 243.904a251.52 251.52 0 0 0-355.776 0l-20.096 20.096-20.096-20.096A251.52 251.52 0 0 0 143.616 599.68S466.24 926.72 512 928c14.336 0.384 86.4-59.52 164.224-128.192l-0.512-0.64a22.016 22.016 0 0 0-11.968-40.896 21.76 21.76 0 0 0-14.784 5.888l-0.064-0.064 62.336-56.832a22.08 22.08 0 0 0-7.808 16.704 22.4 22.4 0 0 0 22.4 22.464c5.44 0 10.24-2.176 14.208-5.44l0.256 0.32 50.048-45.76-0.448-0.448a22.08 22.08 0 0 0-16.768-36.992 21.952 21.952 0 0 0-14.656 5.824l80.384-73.472 0.512 0.512a22.08 22.08 0 0 0-5.696 14.592 22.4 22.4 0 0 0 22.4 22.464 22.016 22.016 0 0 0 14.272-5.504l0.32 0.384 24.832-23.168a251.776 251.776 0 0 0-0.128-355.84z"
             fill=""

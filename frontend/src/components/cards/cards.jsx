@@ -41,6 +41,7 @@ function Cards() {
           <Card
             like={post.post.likes}
             key={post.post._id}
+            id={post.post._id}
             title={post.post.title}
             author={post.post.author}
             imageSrc={post.post.pic_url}
