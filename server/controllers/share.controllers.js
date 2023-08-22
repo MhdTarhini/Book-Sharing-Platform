@@ -64,6 +64,7 @@ const getPost = async (req, res) => {
           user: {
             firstName: followedUser.firstName,
             lastName: followedUser.lastName,
+            userId: followedUser._id,
           },
           post: post,
         }))

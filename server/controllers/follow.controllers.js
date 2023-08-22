@@ -33,24 +33,47 @@ const followUser = async (req, res) => {
 
 const unfollowUser = async (req, res) => {
   const { followerId, followingId } = req.body;
+  console.log(req.body);
 
   try {
-    const existFollow = await Follow.findOne({
+    const existingFollow = await Follow.findOneAndDelete({
       follower: followerId,
       following: followingId,
     });
 
-    if (!existFollow) {
-      return res.status(400).json({ message: "Follow does not exist" });
+    if (!existingFollow) {
+      return res
+        .status(400)
+        .json({ message: "Follow relationship does not exist" });
     }
 
-    await existFollow.remove();
-
-    res.status(200).json({ message: "Follow removed successfully" });
+    res
+      .status(200)
+      .json({ message: "Follow relationship removed successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "failed" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
-module.exports = { followUser, unfollowUser };
+const checkFollow = async (req, res) => {
+  const { followerId, followingId } = req.query;
+
+  try {
+    const existingFollow = await Follow.findOne({
+      follower: followerId,
+      following: followingId,
+    });
+
+    if (existingFollow) {
+      res.status(200).json({ isFollowing: true });
+    } else {
+      res.status(200).json({ isFollowing: false });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { followUser, unfollowUser, checkFollow };

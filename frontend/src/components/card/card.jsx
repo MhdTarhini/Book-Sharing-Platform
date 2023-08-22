@@ -7,6 +7,7 @@ function Card({ id, title, author, imageSrc, review, user, like, gener }) {
   const { userData } = useContext(AuthContext);
   const [userliked, setUserliked] = useState(false);
   const [userfollow, setUserfollow] = useState(false);
+  const [userpost, setUserPost] = useState(false);
 
   const isLiked = () => {
     if (like.length > 0) {
@@ -21,6 +22,24 @@ function Card({ id, title, author, imageSrc, review, user, like, gener }) {
       setUserliked(false);
     }
   };
+  const isfollow = async () => {
+    if (userData.user._id !== user.userId) {
+      try {
+        const res = await axios.get(
+          `http://127.0.0.1:8000/user/?followerId=${userData.user._id}&followingId=${user.userId}`
+        );
+        if (res.data.isFollowing) {
+          setUserfollow(true);
+        } else {
+          setUserfollow(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      setUserPost(true);
+    }
+  };
 
   const handleFollow = async () => {
     const data = new FormData();
@@ -28,7 +47,7 @@ function Card({ id, title, author, imageSrc, review, user, like, gener }) {
     data.append("followingId", user.userId);
     try {
       if (!userfollow) {
-        await axios.post(`http://127.0.0.1:8000//user/follow`, data, {
+        await axios.post(`http://127.0.0.1:8000/user/follow`, data, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -79,6 +98,7 @@ function Card({ id, title, author, imageSrc, review, user, like, gener }) {
   }
   useEffect(() => {
     isLiked();
+    isfollow();
   }, [like]);
   return (
     <div className="card">
@@ -100,7 +120,7 @@ function Card({ id, title, author, imageSrc, review, user, like, gener }) {
               onClick={() => {
                 handleFollow();
               }}>
-              {userfollow ? (
+              {userpost ? null : userfollow ? (
                 <svg
                   width="20px"
                   height="20px"
@@ -130,6 +150,7 @@ function Card({ id, title, author, imageSrc, review, user, like, gener }) {
           </div>
         )}
       </div>
+
       <div className="like-button">
         <svg
           width="25px"
