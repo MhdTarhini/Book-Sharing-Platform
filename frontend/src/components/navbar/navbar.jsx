@@ -1,15 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./navbar.css";
 import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ onSearch }) {
+  const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const { logout } = useContext(AuthContext);
   const handleSearch = () => {
     onSearch(searchText);
   };
   handleSearch();
-
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
   return (
     <div className="navbar">
       <div className="logo">Logo</div>
@@ -37,8 +42,8 @@ function Navbar({ onSearch }) {
           onChange={(e) => setSearchText(e.target.value)}
         />
       </div>
-      <div className="user-info" onClick={logout}>
-        User
+      <div className="user-info" onClick={handleLogout}>
+        Logout
       </div>
     </div>
   );

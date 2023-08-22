@@ -15,6 +15,7 @@ function ShareBook() {
     title: "",
     author: "",
     review: "",
+    genre: "",
     pic_url: null,
   });
 
@@ -31,7 +32,14 @@ function ShareBook() {
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/share/share_book",
-        data,
+        {
+          userId: userData.user._id,
+          title: data.title,
+          author: data.author,
+          review: data.review,
+          genre: data.genre,
+          pic_url: postImage ? await uploadImage() : "",
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -45,6 +53,7 @@ function ShareBook() {
           title: "",
           author: "",
           review: "",
+          gener: "",
           pic_url: null,
         });
         Cards.getPosts();
@@ -69,6 +78,7 @@ function ShareBook() {
         );
         const filename = response.data.filename;
         setData({ ...data, pic_url: filename });
+        return filename;
       } catch (error) {
         console.log(error);
       }

@@ -24,7 +24,6 @@ function SearchCards({ search }) {
       }
     }
   };
-  console.log(dataSearch);
 
   useEffect(() => {
     handleSearch();
