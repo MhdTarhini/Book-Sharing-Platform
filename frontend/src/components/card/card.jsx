@@ -30,7 +30,11 @@ function Card({ id, title, author, imageSrc, review, user, like }) {
         });
         setUserliked(true);
       } else {
-        await axios.delete(`http://127.0.0.1:8000/like/unlike/`, data);
+        await axios.post(`http://127.0.0.1:8000/like/unlike/`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         setUserliked(false);
       }
     } catch (error) {
