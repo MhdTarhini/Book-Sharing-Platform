@@ -31,5 +31,10 @@
 .user-info {
     font-size: 16px;
     font-weight: bold;
+    display: flex;
+        gap: 20px;
+    }
+    
+.logout {
     cursor: pointer;
 }
