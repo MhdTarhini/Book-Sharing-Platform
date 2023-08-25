@@ -19,7 +19,7 @@ function Navbar({ onSearch }) {
 
   return (
     <div className="navbar">
-      <div className="logo">Logo</div>
+      <div className="logo-nav">BOOKS Platform</div>
       <div className="search">
         <svg
           width="24px"

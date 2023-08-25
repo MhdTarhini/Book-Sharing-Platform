@@ -30,7 +30,7 @@ function Login() {
   };
   return (
     <div className="flex column center signin-container">
-      <div className="logo">Books </div>
+      <div className="logo">Books Platform</div>
       <div className="inputs flex column">
         <Input
           onchange={handleDataChange}

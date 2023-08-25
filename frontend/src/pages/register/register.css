@@ -1,44 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 .signup-container {
+    width: 100%;
     max-width: 400px;
-    position: relative;
     padding: 40px;
-    height: 700px;
-    left: 38%;
-    border: 1px solid rgba(0, 0, 0, 0.286);
-    gap: 20px;
+    text-align: center;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-    width: 175px;
-    height: 51px;
-    cursor: pointer;
+    font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
 }
 
 .header-text {
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 20px;
-    margin: 0 40px 10px;
-    text-align: center;
-    color: rgba(65, 65, 65, 0.678);
-    width: 100%;
+    font-size: 14px;
+        margin-bottom: 20px;
+        color: #777;
 }
 
 .facebook {
-    border: none;
-    text-align: center;
-    background-color: rgba(0, 149, 246);
-    width: 100%;
-    padding: 10px;
-    color: white;
+    background-color: #1877f2;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+    
+    .or {
+        color: #999;
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 }
 
 .inputs {
-    width: 100%;
-    gap: 5px
+    margin-bottom: 20px;
 }
 
 .text {
     font-size: 12px;
-    color: rgba(65, 65, 65, 0.678);
+    color: #999;
+        margin-bottom: 10px;
+    }
+    
+    .bottom-text a,
+    .policy a {
+        color: #1877f2;
+        text-decoration: none;
+    }
+    
+    .bottom-text a:hover,
+    .policy a:hover {
+        text-decoration: underline;
+    }
+    
+    .facebook:hover {
+        background-color: #115dcb;
+    }
+    
+    .have-account {
+        font-size: 12px;
+        color: #333;
+        margin-top: 10px;
+    }
+    
+    .button {
+        background-color: #1877f2;
+        color: #ffffff;
+        padding: 10px 0;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    
+    .button:hover {
+        background-color: #115dcb;
 }

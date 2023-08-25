@@ -41,7 +41,7 @@ function Register() {
   return (
     <>
       <div className=" flex column center signup-container">
-        <div className="logo">Books</div>
+        <div className="logo">Books PLatform</div>
         <div className="header-text">
           Sign up tp see photos and videos from your friends
         </div>

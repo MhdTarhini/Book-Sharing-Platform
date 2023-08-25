@@ -1,37 +1,85 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
+}
+
 .signin-container {
-    max-width: 400px;
-    position: relative;
-    padding: 40px;
-    height: 700px;
-    left: 38%;
-    border: 1px solid rgba(0, 0, 0, 0.286);
-    gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-    width: 175px;
-    cursor: pointer;
-    font-size: 30px;
-    font-weight: 700;
-}
-
-
-.button {
-    border: none;
-    text-align: center;
-    background-color: rgba(0, 149, 246);
-    width: 100%;
-    padding: 10px;
-    color: white;
-    cursor: pointer;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #343a40;
 }
 
 .inputs {
-    width: 100%;
-    gap: 5px;
+  margin-bottom: 30px;
 }
 
-.text {
-    font-size: 12px;
-    color: rgba(65, 65, 65, 0.678);
+.error {
+  color: #ff5a5f;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.or {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6c757d;
+  font-weight: bold;
+}
+
+.or span {
+  flex: 1;
+  height: 1px;
+  background-color: #6c757d;
+  margin: 0 10px;
+}
+
+.button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+
+
+.have-account {
+  margin-top: 20px;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
